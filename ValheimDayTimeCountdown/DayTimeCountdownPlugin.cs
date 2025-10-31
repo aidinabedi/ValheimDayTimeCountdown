@@ -20,7 +20,6 @@ namespace ValheimDayTimeCountdown
         private static ConfigEntry<bool> _displayDay;
         private static ConfigEntry<bool> _displayTime;
         private static ConfigEntry<bool> _displayBackground;
-        private static ConfigEntry<bool> _twentyFourHourClock;
         private static ConfigEntry<int> _fontSize;
         private static ConfigEntry<string> _fontName;
         private static ConfigEntry<Color> _fontColor;
@@ -51,7 +50,6 @@ namespace ValheimDayTimeCountdown
             _displayDay = Config.Bind("General", "Display day", true, "Display day");
             _displayTime = Config.Bind("General", "Display time", true, "Display time");
             _displayBackground = Config.Bind("General", "Display background", true, "Display background");
-            _twentyFourHourClock = Config.Bind("General", "24-hour clock", true, "24-hour clock");
             _fontSize = Config.Bind("General", "Font size", 16, "Font size");
             _fontName = Config.Bind("General", "Font name", DEFAULT_FONT, "Font name");
             _fontColor = Config.Bind("General", "Font color", new Color(1, 1, 1, 0.791f), "Font color");
@@ -273,7 +271,7 @@ namespace ValheimDayTimeCountdown
 		{
 			if (!EnvMan.instance || Localization.instance == null) return null;
 
-			var day = (int)typeof(EnvMan).GetMethod("GetCurrentDay", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(EnvMan.instance, null);
+			var day = EnvMan.instance.GetDay();
 
 			return Localization.instance.Localize("$msg_newday", day.ToString());
 		}
@@ -282,21 +280,22 @@ namespace ValheimDayTimeCountdown
         /// Get the current time of the day.
         /// </summary>
         /// <returns>
-        /// The time in 24-hour notation or 12-hour notation if config is set to true.
+        /// The time left in the current day or night.
         /// </returns>
 		private string GetCurrentTimeText()
 		{
 			if (!EnvMan.instance) return null;
 
-			var fraction = (float)typeof(EnvMan).GetField("m_smoothDayFraction", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(EnvMan.instance);
+            var fraction = EnvMan.instance.GetDayFraction();
+            var dayLengthSec = EnvMan.instance.m_dayLengthSec;
 
-			var hour = (int)(fraction * 24);
-			var minute = (int)((fraction * 24 - hour) * 60);
-			var second = (int)((((fraction * 24 - hour) * 60) - minute) * 60);
+			var fractionLeft = 0.5f - (fraction + 0.25f) % 0.5f;
+            var minutesLeft = (int)(fractionLeft * dayLengthSec) / 60;
+            var secondsLeft = (int)(fractionLeft * dayLengthSec) % 60;
+            var timeLeft = minutesLeft > 0 ? $"{minutesLeft}m" : $"{secondsLeft}s";
 
-			DateTime date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, hour, minute, second);
-
-			return date.ToString(_twentyFourHourClock.Value ? "HH:mm" : "hh:mm tt");
+            var isDay = 0.25f <= fraction && fraction <= 0.75f;
+			return (isDay ? "Day " : "Night ") + timeLeft;
 		}
 
         /// <summary>
