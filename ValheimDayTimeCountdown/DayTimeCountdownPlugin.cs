@@ -7,13 +7,13 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Oryxen.Valheim.UI.DisplayDayTime
+namespace ValheimDayTimeCountdown
 {
-    [BepInPlugin(ID, "Display Day & Time in HUD", "1.1.2")]
+    [BepInPlugin(ID, "Display Day & Time Countdown", "1.0.0")]
     [BepInProcess("valheim.exe")]
-    public class DisplayDayTimePlugin : BaseUnityPlugin
+    public class DayTimeCountdownPlugin : BaseUnityPlugin
     {
-        public const string ID = "oryxen.valheim.ui.displaydaytime";
+        public const string ID = "ValheimDayTimeCountdown";
 
         #region BepInEx configs
         private static ConfigEntry<bool> _displayUnderMiniMap;
@@ -113,7 +113,7 @@ namespace Oryxen.Valheim.UI.DisplayDayTime
 
         /// <summary>
         /// Creates a panel game object with the day and time game object as children to display the day and time as text.
-        /// This panel is added as a child to the hudroot and anchored to the top right of the screen (above the minimap). 
+        /// This panel is added as a child to the hudroot and anchored to the top right of the screen (above the minimap).
         /// </summary>
         public static void CreatePanel(Hud hudInstance)
 		{

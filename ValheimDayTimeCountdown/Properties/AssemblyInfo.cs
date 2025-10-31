@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Display Day & Time in HUD")]
+[assembly: AssemblyTitle("Display Day & Time Countdown")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Oryxen")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Valheim")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e12e7c61-76d0-4cf3-8bb3-7e8abb19d120")]
+[assembly: Guid("e12e7c61-76d0-4cf3-8bb3-7e8abb19d121")]
 
 // Version information for an assembly consists of the following four values:
 //
