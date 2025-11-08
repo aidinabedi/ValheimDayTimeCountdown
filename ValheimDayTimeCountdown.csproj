@@ -90,7 +90,13 @@ internal static class Manifest
       <Compile Include="$(ManifestCSharpFile)" />
     </ItemGroup>
   </Target>
+  <PropertyGroup>
+    <OutputZipFile>$(MSBuildProjectName).zip</OutputZipFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <UpToDateCheckOutput Include="$(OutputZipFile)" />
+  </ItemGroup>
   <Target Name="ZipOutputPath" AfterTargets="Build">
-    <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ProjectName).zip" Overwrite="True" />
+    <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(OutputZipFile)" Overwrite="True" />
   </Target>
 </Project>
