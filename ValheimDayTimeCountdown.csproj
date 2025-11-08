@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Product>DayTimeCountdown</Product>
-    <Description>Display above the minimap, both in-game day and countdown of the time left in the current day or night (in minutes/seconds).</Description>
+    <Description>Display day count and a how much of the current day or night is left (in minutes/seconds)</Description>
     <Version>1.0.0</Version>
     <Authors>Aidin</Authors>
     <RepositoryUrl>https://github.com/aidinabedi/ValheimDayTimeCountdown</RepositoryUrl>
