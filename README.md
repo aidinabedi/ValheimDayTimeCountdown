@@ -1,55 +1,42 @@
 # Valheim UI Mod - Display Day & Time Countdown
 
-Simple UI mod to display above the minimap, both the in-game day and a countdown of the time left in the current day or night (in minutes/seconds).
-The panel game object with the day & time in it, is added as a child to the HUD root of the game, so it should only be visible when the HUD is visible.
+Simple UI mod that near the minimap, displays both the day count and a how much of the current day or night is left (in minutes/seconds). This is a modified version of the mod [Display Day and Time in HUD](https://www.nexusmods.com/valheim/mods/861), which displays an in-game clock rather than a countdown in IRL.
 
-## Requirements
+## Prerequisites
 
-[BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/)
+- Install a mod manager like [R2Modman](https://thunderstore.io/package/ebkr/r2modman/).
+- Install [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/) with mod manager.
 
-## Installation guide
+## Install from Thunderstore
 
-1. Download and install [BepInEx](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/).
-2. Download this mod from [Nexus Mods](https://www.nexusmods.com/valheim/mods/861) or from the the latest [release](https://github.com/aidinabedi/ValheimDayTimeCountdown/releases), you can skip the next step if installed with Vortex.
-3. Move the file **ValheimDayTimeCountdown.dll** into BepInEx\plugins (you can find this directory under your Valheim directory).
-4. Run the game!
-5. Optional: you can edit the configuration file under BepInEx\config\ValheimDayTimeCountdown.cfg to change the settings to your liking.
+Install [DayTimeCountdown](https://thunderstore.io/c/valheim/p/Aidin/DayTimeCountdown/) with mod manager.
 
-## Build guide
+## Build from source
 
-1. Clone this repository.
-2. Optional: make some changes 😉.
-3. Build the release.
-4. Copy the file **ValheimDayTimeCountdown.dll** from this directory in the project directory: ValheimDayTimeCountdown\bin\Release
-5. Paste the file **ValheimDayTimeCountdown.dll** into directory BepInEx\plugins from your Valheim directory.
-6. Now you can run the game and the mod should be active if there are no issues.
-7. Optional: you can edit the configuration file under BepInEx\config\ValheimDayTimeCountdown.cfg to change the settings to your liking.
+1. Install .NET SDK (Core 3.1 or later) from [Microsoft](https://dotnet.microsoft.com/en-us/download).
+2. Download source code from [GitHub](https://github.com/aidinabedi/ValheimDayTimeCountdown).
+3. Build release with .NET CLI command: `dotnet build -c Release`
+4. Import generated `ValheimDayTimeCountdown.zip` as local mod using mod manager.
 
 ## Configuration
 
-The configuration file will be generated when the game runs with this mod installed.
-You can find the configuration file for this mod under the Valheim directory: BepInEx\config\ValheimDayTimeCountdown.cfg
+The configuration file for this mod is automatically generated the first time you run the game with the mod installed. You can find it in your local
+BepInEx config directory (`BepInEx\config\ValheimDayTimeCountdown.cfg`).
 
-Configuration settings you can change:
+You can customize the following settings in the configuration file:
 
-1. Display under minimap: set to "false" as default value (if set to false, the mod displays above the minimap).
-2. Display time: set to "true" as default.
-3. Display day: set to "true" as default.
-4. Display background: set to "true" as default.
-5. Font name: set "AveriaSansLibre-Bold" as default, if font does not exist in resources "AveriaSansLibre-Bold" will be set.
-6. Font size: set to 16 as default.
-7. Font color: set to RGBA(1, 1, 1, 0.791) as default.
-8. Background color: set to RGBA(0, 0, 0, 0.3921569) as default.
-9.  Text outline color: set to black as default.
-10. Text outline enabled: to to "true" as default.
-11. Margin between minimap and this panel: set to 0 as default.
-12. Padding left and right between text and border: set to 10 as default.
-13. Reverse text position: set to "false" as default, if set to "true", time will display to the left and day will display to the right.
-14. Panel width: set to 200 as default.
-15. Panel height: set to 30 as default.
-
-## Links
-
-[Nexus Mods](https://www.nexusmods.com/valheim/mods/861)
-
-[BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/)
+1. **Display under minimap**: Default is `false`. If set to `false`, the panel appears above the minimap; if set to `true`, it appears below.
+2. **Display time**: Default is `true`. Enables or disables the time countdown display.
+3. **Display day**: Default is `true`. Enables or disables the day count display.
+4. **Display background**: Default is `true`. Shows or hides the background panel behind the text.
+5. **Font name**: Default is `AveriaSansLibre-Bold`. If this font is not available in resources, it will fall back to the default.
+6. **Font size**: Default is `16`. Sets the size of the displayed text.
+7. **Font color**: Default is `RGBA(1, 1, 1, 0.791)`. Sets the color and transparency of the text.
+8. **Background color**: Default is `RGBA(0, 0, 0, 0.3921569)`. Sets the color and transparency of the background panel.
+9. **Text outline color**: Default is `black`. Sets the color of the text outline.
+10. **Text outline enabled**: Default is `true`. Enables or disables the text outline.
+11. **Margin between minimap and panel**: Default is `0`. Sets the space between the minimap and the panel.
+12. **Padding (left and right)**: Default is `10`. Sets the horizontal padding between the text and the panel border.
+13. **Reverse text position**: Default is `false`. If set to `true`, the time is displayed on the left and the day on the right.
+14. **Panel width**: Default is `200`. Sets the width of the panel.
+15. **Panel height**: Default is `30`. Sets the height of the panel.
