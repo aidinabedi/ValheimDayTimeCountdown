@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>disable</Nullable>
-    <DebugType>none</DebugType>
-    <GenerateDependencyFile>false</GenerateDependencyFile>
     <Product>DayTimeCountdown</Product>
     <Description>Display above the minimap, both in-game day and countdown of the time left in the current day or night (in minutes/seconds).</Description>
     <Version>1.0.0</Version>
     <Authors>Aidin</Authors>
+    <RepositoryUrl>https://github.com/aidinabedi/ValheimDayTimeCountdown</RepositoryUrl>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>disable</Nullable>
+    <DebugType>none</DebugType>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony20">
@@ -44,9 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -55,12 +53,32 @@
     </Content>
     <None Remove="*.zip" />
   </ItemGroup>
-  <Target Name="GenerateVersionInfo" BeforeTargets="CoreCompile">
+  <Target Name="Manifest" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <ManifestJsonFile>$(OutputPath)manifest.json</ManifestJsonFile>
+      <ManifestCSharpFile>$(IntermediateOutputPath)Manifest.cs</ManifestCSharpFile>
+    </PropertyGroup>
+    <Message Importance="high" Text="Generating $(ManifestJsonFile)" />
     <WriteLinesToFile
-      File="$(IntermediateOutputPath)VersionInfo.cs"
+      File="$(ManifestJsonFile)"
       Overwrite="true"
       Lines="
-internal static class VersionInfo
+{
+  &quot;name&quot;: &quot;$(Product)&quot;,
+  &quot;author&quot;: &quot;$(Authors)&quot;,
+  &quot;description&quot;: &quot;$(Description)&quot;,
+  &quot;version_number&quot;: &quot;$(Version)&quot;,
+  &quot;dependencies&quot;: [
+    &quot;denikson-BepInExPack_Valheim-5.4.2202&quot;
+  ],
+  &quot;website_url&quot;: &quot;$(RepositoryUrl)&quot;
+}" />
+    <Message Importance="high" Text="Generating $(ManifestCSharpFile)" />
+    <WriteLinesToFile
+      File="$(ManifestCSharpFile)"
+      Overwrite="true"
+      Lines="
+internal static class Manifest
 {
     public const string ProjectName = &quot;$(ProjectName)&quot;%3B
     public const string Product = &quot;$(Product)&quot;%3B
@@ -69,7 +87,7 @@ internal static class VersionInfo
     public const string Authors = &quot;$(Authors)&quot;%3B
 }" />
     <ItemGroup>
-      <Compile Include="$(IntermediateOutputPath)VersionInfo.cs" />
+      <Compile Include="$(ManifestCSharpFile)" />
     </ItemGroup>
   </Target>
   <Target Name="ZipOutputPath" AfterTargets="Build">

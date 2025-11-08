@@ -9,11 +9,11 @@ using UnityEngine.UI;
 
 namespace ValheimDayTimeCountdown
 {
-    [BepInPlugin(ID, VersionInfo.Product, VersionInfo.Version)]
+    [BepInPlugin(ID, Manifest.Product, Manifest.Version)]
     [BepInProcess("valheim.exe")]
     public class DayTimeCountdownPlugin : BaseUnityPlugin
     {
-        public const string ID = VersionInfo.ProjectName;
+        public const string ID = Manifest.ProjectName;
 
         #region BepInEx configs
         private static ConfigEntry<bool> _displayUnderMiniMap;
