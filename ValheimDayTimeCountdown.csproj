@@ -4,6 +4,10 @@
     <Nullable>disable</Nullable>
     <DebugType>none</DebugType>
     <GenerateDependencyFile>false</GenerateDependencyFile>
+    <Product>DayTimeCountdown</Product>
+    <Description>Display above the minimap, both in-game day and countdown of the time left in the current day or night (in minutes/seconds).</Description>
+    <Version>1.0.0</Version>
+    <Authors>Aidin</Authors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony20">
@@ -49,7 +53,25 @@
     <Content Include="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Remove="*.zip" />
   </ItemGroup>
+  <Target Name="GenerateVersionInfo" BeforeTargets="CoreCompile">
+    <WriteLinesToFile
+      File="$(IntermediateOutputPath)VersionInfo.cs"
+      Overwrite="true"
+      Lines="
+internal static class VersionInfo
+{
+    public const string ProjectName = &quot;$(ProjectName)&quot;%3B
+    public const string Product = &quot;$(Product)&quot;%3B
+    public const string Description = &quot;$(Description)&quot;%3B
+    public const string Version = &quot;$(Version)&quot;%3B
+    public const string Authors = &quot;$(Authors)&quot;%3B
+}" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)VersionInfo.cs" />
+    </ItemGroup>
+  </Target>
   <Target Name="ZipOutputPath" AfterTargets="Build">
     <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ProjectName).zip" Overwrite="True" />
   </Target>
