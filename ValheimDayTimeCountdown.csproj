@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Product>DayTimeCountdown</Product>
     <Description>Display day count and a how much of the current day or night is left (in minutes/seconds)</Description>
-    <Version>1.0.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Aidin</Authors>
     <RepositoryUrl>https://github.com/aidinabedi/ValheimDayTimeCountdown</RepositoryUrl>
     <TargetFramework>netstandard2.1</TargetFramework>
